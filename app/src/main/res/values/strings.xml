@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">MPMemoryGameProject</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_game_board_selector">Board Selector</string>
+    <string name="title_activity_game">Memory Match</string>
+    <string name="gameScreenIntro">Memory Match Game</string>
+
+</resources>
