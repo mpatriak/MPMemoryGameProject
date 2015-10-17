@@ -1,34 +1,24 @@
 package com.example.michal.mpmemorygameproject;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class gameActivity extends AppCompatActivity {
-
+/**
+ * Created by Michal on 10/17/2015.
+ */
+public class card6Activity extends AppCompatActivity
+{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_game);
+        // Inflate the view.
+        setContentView(R.layout.card6);
+        // Retrieves the Extras from the Intent using the key from the key-value pair.
+        //gamesize = getIntent().getStringExtra(boardSelectorActivity.EXTRA_GAMESIZE);
 
-        // Retrieve the extra to determine which size game board to display.
-        //
-        //
-        //
-        //
 
-        // A for loop used to add members to an ArrayList based on how many cards were selected
-        // for the game board.
-        //
-        //
-        //
-
-        // Using the board size value, display a randomly generated array of images of letters.
-        //
-        //
-        //
-        //
     }
 
     @Override

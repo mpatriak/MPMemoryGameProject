@@ -17,11 +17,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".gameBoardSelector"
+            android:name=".boardSelectorActivity"
             android:label="@string/title_activity_game_board_selector" >
         </activity>
         <activity
-            android:name=".gameActivity"
+            android:name=".card4Activity"
             android:label="@string/title_activity_game" >
         </activity>
     </application>

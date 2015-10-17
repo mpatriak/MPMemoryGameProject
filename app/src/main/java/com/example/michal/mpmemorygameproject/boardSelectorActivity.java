@@ -10,8 +10,12 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-public class gameBoardSelector extends AppCompatActivity
+public class boardSelectorActivity extends AppCompatActivity
 {
+    String gamesize;
+
+    // String to used a a key in the key-value pair when passing the Extra.
+    public static final String EXTRA_GAMESIZE = "com.example.michal.memorygameproject.gamesize";
 
     // Define the androidListView.
     ListView mListView;
@@ -28,33 +32,30 @@ public class gameBoardSelector extends AppCompatActivity
         mListView = (ListView) findViewById(R.id.list);
 
         // Declare Array adapter.
-        ArrayAdapter<String> countryAdapter = new ArrayAdapter<String>(this,android.R.layout
+        ArrayAdapter<String> gameAdapter = new ArrayAdapter<String>(this,android.R.layout
                 .simple_list_item_1, gameTypes);
 
         // Setting the android ListView's adapter to the newly created adapter.
-        mListView.setAdapter(countryAdapter);
+        mListView.setAdapter(gameAdapter);
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
-                // The position where the list item is clicked is obtained from the parameter
-                // position of the android ListView.
-                int itemPosition = position;
 
-                // Get the string value of the item where the user clicked.
-                String itemValue = (String)mListView.getItemAtPosition(position);
+                String ETGameSize = (String)mListView.getItemAtPosition(position);
 
-                // In order to start displaying a new acitivty we need an intent.
-                Intent intent = new Intent(getApplicationContext(),gameActivity.class);
-
-                // Pass in the item selected as an extra on the intent.
-                //
-                //
-                //
-
-                // Here we will pass the previously created intent as the parameter.
-                startActivity(intent);
+                switch (ETGameSize)
+                {
+                    case "4 cards":
+                        Intent i = new Intent(boardSelectorActivity.this, card4Activity.class);
+                        startActivity(i);
+                        break;
+                    case "6 cards":
+                        Intent b = new Intent(boardSelectorActivity.this, card6Activity.class);
+                        startActivity(b);
+                        break;
+                }
             }
         });
     }
@@ -80,4 +81,4 @@ public class gameBoardSelector extends AppCompatActivity
 
         return super.onOptionsItemSelected(item);
     }
-} // End class gameBoardSelector.
+} // End class boardSelectorActivity.

@@ -1,37 +1,29 @@
 package com.example.michal.mpmemorygameproject;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 
-public class menuActivity extends AppCompatActivity
+public class card4Activity extends AppCompatActivity
 {
-    private Button mPlayButton;
+    private String gamesize;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu);
+        // Inflate the view.
+        setContentView(R.layout.card4);
+        // Retrieves the Extras from the Intent using the key from the key-value pair.
+        //gamesize = getIntent().getStringExtra(boardSelectorActivity.EXTRA_GAMESIZE);
 
-        mPlayButton = (Button)findViewById(R.id.play_button);
-        mPlayButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Start selectorActivity.
-                Intent i = new Intent(getApplicationContext(), boardSelectorActivity.class);
-                startActivity(i);
-            }
-        });
+
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_menu, menu);
+        getMenuInflater().inflate(R.menu.menu_game, menu);
         return true;
     }
 
