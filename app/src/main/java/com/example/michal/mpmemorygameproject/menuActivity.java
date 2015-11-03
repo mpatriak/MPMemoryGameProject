@@ -22,7 +22,7 @@ public class menuActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 //Start selectorActivity.
-                Intent i = new Intent(getApplicationContext(), boardSelectorActivity.class);
+                Intent i = new Intent(getApplicationContext(), boardActivity.class);
                 startActivity(i);
             }
         });

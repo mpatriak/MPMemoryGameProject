@@ -6,5 +6,6 @@
     <string name="title_activity_game_board_selector">Board Selector</string>
     <string name="title_activity_game">Memory Match</string>
     <string name="gameScreenIntro">Memory Match Game</string>
+    <string name="card4Title">Match Game!</string>
 
 </resources>

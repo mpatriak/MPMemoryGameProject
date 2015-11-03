@@ -17,16 +17,16 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".boardSelectorActivity"
+            android:name=".boardActivity"
             android:label="@string/title_activity_game_board_selector" >
         </activity>
         <activity
-            android:name=".card4Activity"
+            android:name=".gameActivity"
             android:label="@string/title_activity_game" >
         </activity>
-        <activity android:name=".card6Activity"
-                  android:label="@string/title_activity_game_board_selector" >
-
+        <activity
+            android:name=".Card"
+            android:label=" " >
         </activity>
     </application>
 
