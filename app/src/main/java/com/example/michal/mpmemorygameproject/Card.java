@@ -29,7 +29,6 @@ public class Card extends Button
         return this.id;
     }
 
-
     public void setMatched(boolean matched)
     {
         this.matched = matched;
@@ -44,7 +43,5 @@ public class Card extends Button
     {
 
     }
-
-
 
 }

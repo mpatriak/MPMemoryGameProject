@@ -22,6 +22,10 @@ import java.util.Timer;
 
 public class gameActivity extends AppCompatActivity
 {
+
+    private static final String TRIES_REMAINING = "tries_left";
+    private static final String CURRENT_SCORE = "current_score";
+
     private Card selectedCard;
     private Button mNewGame;
     private Button mTryAgain;
@@ -40,6 +44,7 @@ public class gameActivity extends AppCompatActivity
     TextView scoreNumber;
     int mScoreIncrement;
     int mTotalScore;
+    int buttonValue;
 
     private void startGame()
     {
@@ -152,8 +157,6 @@ public class gameActivity extends AppCompatActivity
 
 
     }
-
-
 
     private void flipCard()
     {
@@ -297,7 +300,16 @@ public class gameActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         // Inflate the view.
         setContentView(R.layout.game);
+
+
+
         startGame();
+
+        if (savedInstanceState != null)
+        {
+            triesLeft = savedInstanceState.getInt(TRIES_REMAINING);
+            mTotalScore = savedInstanceState.getInt(CURRENT_SCORE);
+        }
 
     }
 
@@ -321,6 +333,14 @@ public class gameActivity extends AppCompatActivity
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState)
+    {
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putInt(TRIES_REMAINING, triesLeft);
+        savedInstanceState.putInt(CURRENT_SCORE, mTotalScore);
     }
 }
 

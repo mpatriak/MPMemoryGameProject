@@ -5,7 +5,9 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_game_board_selector">Board Selector</string>
     <string name="title_activity_game">Memory Match</string>
-    <string name="gameScreenIntro">Memory Match Game</string>
-    <string name="card4Title">Match Game!</string>
+    <string name="game_screen_intro">Memory Match Game</string>
+    <string name="game_title">Match Game!</string>
+    <string name="title_image">Memory Match Game</string>
+    <string name="authored_by">By: Michal Patriak</string>
 
 </resources>
