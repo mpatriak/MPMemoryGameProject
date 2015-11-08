@@ -1,9 +1,7 @@
 package com.example.michal.mpmemorygameproject;
 
   import android.content.Intent;
-import android.graphics.Color;
-import android.net.wifi.p2p.WifiP2pManager;
-import android.support.v7.app.AppCompatActivity;
+  import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,16 +11,15 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.lang.reflect.Array;
-import java.util.Collections;
+  import java.util.Collections;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
 
 public class gameActivity extends AppCompatActivity
 {
 
+    // Tags for key-value pairs.
     private static final String TRIES_REMAINING = "tries_left";
     private static final String CURRENT_SCORE = "current_score";
     private static final String BUTTON_VALUES = "button_values";
@@ -32,6 +29,7 @@ public class gameActivity extends AppCompatActivity
     private static final String C1VAL = "c1Val";
     private static final String C2VAL = "c2Val";
 
+    // Declaration of necessary variables.
     private Card selectedCard;
     private Button mNewGame;
     private Button mTryAgain;
@@ -39,40 +37,32 @@ public class gameActivity extends AppCompatActivity
     private CharSequence[] charSequenceForButtons;
     private Card c1;
     private Card c2;
-    private String name;
-    private Button c;
-    int matchVal1 = 100;
-    int matchVal2 = 200;
-    int cardFilled = 0;
-    private Timer t;
-    int score = 0;
     int triesLeft;
-    TextView triesRemaining;
-    TextView scoreNumber;
+    TextView mTriesRemaining;
+    TextView mScoreNumber;
     int mScoreIncrement;
     int mTotalScore;
-    int buttonValue;
     boolean enabled;
     int c1Val;
     int c2Val;
-
     ArrayList<Integer> cardVals = new ArrayList<Integer>();
 
     private void startGame()
     {
-
+        // Receives the game size from boardActivity.
         Bundle extras = getIntent().getExtras();
         int gameSize = extras.getInt("GameSize");
+        // Creates an empty ArrayList.
         List<Card> cardList = new ArrayList<Card>();
-
-
         mScoreIncrement = 1000;
-        triesRemaining = (TextView)findViewById(R.id.triesLeftNumber);
-        triesRemaining.setText(triesLeft + "");
 
-        scoreNumber = (TextView)findViewById(R.id.score_number);
-        scoreNumber.setText(mTotalScore + "");
+        // Initializes the Score and Tries Left fields on the game screen.
+        mTriesRemaining = (TextView)findViewById(R.id.triesLeftNumber);
+        mTriesRemaining.setText(triesLeft + "");
+        mScoreNumber = (TextView)findViewById(R.id.score_number);
+        mScoreNumber.setText(mTotalScore + "");
 
+        // Sets the New Game button to launch menuActivity to create a new game.
         mNewGame = (Button)findViewById(R.id.new_game);
         mNewGame.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,7 +72,6 @@ public class gameActivity extends AppCompatActivity
             }
         });
 
-
         // Loop through the 10 pairs and add each incremented values to
         // the ArrayList twice so that a pair will exist.
         if (cardVals.size() < 1 ){
@@ -91,13 +80,11 @@ public class gameActivity extends AppCompatActivity
                 cardVals.add(i);
                 cardVals.add(i);
             }
-
             // Shuffles the ArrayList of cards for a new game.
             Collections.shuffle(cardVals);
         }
 
-
-
+        // Gets references to the layouts used to populate the game.
         ViewGroup row1 = (ViewGroup) findViewById(R.id.row1);
         ViewGroup row2 = (ViewGroup) findViewById(R.id.row2);
         ViewGroup row3 = (ViewGroup) findViewById(R.id.row3);
@@ -112,15 +99,12 @@ public class gameActivity extends AppCompatActivity
         {
             final Card c = new Card(this);
             c.setId(val);
-            //c.setText(val);
-            //final Button c = new Button(this);
-                c.setText("");
-
-            //c.setBackgroundColor(Color.CYAN);
+            c.setText("");
             c.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
                     ViewGroup.LayoutParams
                             .WRAP_CONTENT));
 
+            // Determines where in the layout to add the newly created button.
             if (count < 3)
             {
                 row1.addView(c);
@@ -146,24 +130,16 @@ public class gameActivity extends AppCompatActivity
 
             count++;
 
-
-
+            // Calls the flipCard() method when a Card button is clicked.
             c.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     // When the user presses a button, selectedCard is set to the current card
                     // selected.
                     selectedCard = c;
-                    // Calls the method to turn the card over.
                     flipCard();
-
                 }
-
-
             });
-
-
-
             // Each Card object that is created is added to the cardsList ArrayList.
             cardList.add(c);
         }
@@ -207,6 +183,8 @@ public class gameActivity extends AppCompatActivity
 
     }
 
+    // Private method that stores the clicked Card butons in storage variables to prepre for
+    // checkCard().
     private void flipCard()
     {
         if (c1 == null && c2 == null)
@@ -219,32 +197,31 @@ public class gameActivity extends AppCompatActivity
         {
             c2 = selectedCard;
             c2.setText(String.valueOf(c2.getId()));
-
-
-
             checkCard();
         }
     }
 
+    // Private method determines whether two clicked Card buttons match each other. If they do,
+    // isGameWon() is called to determine whether all possible matches have been made. If they
+    // don't match, the screen resets itself for the next try.
     private void checkCard()
     {
         if (c1.getId() == c2.getId())
         {
             c1.setEnabled(false);
             c2.setEnabled(false);
-
             c1.setMatched(true);
             c2.setMatched(true);
-
-            scoreNumber = (TextView)findViewById(R.id.score_number);
+            mScoreNumber = (TextView)findViewById(R.id.score_number);
             mTotalScore = mTotalScore + mScoreIncrement;
-            scoreNumber.setText("" + mTotalScore);
+            mScoreNumber.setText("" + mTotalScore);
 
+            // If the game is won, a congratulatory message is displayed and the screen prepares
+            // for a new game to be clicked.
             if (this.isGameWon())
             {
                 Toast.makeText(this, "You Won!", Toast.LENGTH_LONG).show();
                 mNewGame = (Button)findViewById(R.id.new_game);
-                //mNewGame.setEnabled(true);
                 mNewGame.setOnClickListener(new View.OnClickListener()
                 {
                     @Override
@@ -254,21 +231,17 @@ public class gameActivity extends AppCompatActivity
                         startActivity(i);
                     }
                 });
-
-
             }
         } else
         {
-            triesRemaining = (TextView)findViewById(R.id.triesLeftNumber);
+            mTriesRemaining = (TextView)findViewById(R.id.triesLeftNumber);
             triesLeft--;
-            triesRemaining.setText("" + triesLeft);
+            mTriesRemaining.setText("" + triesLeft);
 
             for (Card c : cards)
             {
                 c.setMatched(false);
             }
-
-
 
             mScoreIncrement = mScoreIncrement - 100;
 
@@ -279,10 +252,9 @@ public class gameActivity extends AppCompatActivity
             {
                 mTryAgain = (Button)findViewById(R.id.try_again);
                 mTryAgain.setEnabled(true);
-
                 mTotalScore = 0;
-                scoreNumber = (TextView)findViewById(R.id.score_number);
-                scoreNumber.setText(mTotalScore + "");
+                mScoreNumber = (TextView)findViewById(R.id.score_number);
+                mScoreNumber.setText(mTotalScore + "");
 
                 for (Card c : cards)
                 {
@@ -297,7 +269,6 @@ public class gameActivity extends AppCompatActivity
                             c.setText("");
                             c.setEnabled(true);
                         }
-
                         mTryAgain.setEnabled(false);
                     }
                 });
@@ -309,6 +280,8 @@ public class gameActivity extends AppCompatActivity
         c2 = null;
     }
 
+    // Loops through the entire ArrayList to check if the matched property is set to true for all
+    // the Card objects.
     private boolean isGameWon()
     {
         for (Card c : this.cards)
@@ -322,6 +295,8 @@ public class gameActivity extends AppCompatActivity
 
     }
 
+    // Once no more tries remain the game is over. All Card objects are reset and the new game
+    // button is the only thing enabled on the screen.
     private void gameOver()
     {
         for (Card c : this.cards)
@@ -352,6 +327,8 @@ public class gameActivity extends AppCompatActivity
         // Inflate the view.
         setContentView(R.layout.game);
 
+        // Pulls values from savedInstanceState when the screen is rotated if the instance
+        // already exists.
         if (savedInstanceState != null)
         {
             triesLeft = savedInstanceState.getInt(TRIES_REMAINING);
@@ -368,9 +345,7 @@ public class gameActivity extends AppCompatActivity
             charSequenceForButtons = new CharSequence[0];
             cardVals = new ArrayList<>();
         }
-
-
-
+        // Method call to start the game logic.
         startGame();
     }
 
@@ -392,7 +367,6 @@ public class gameActivity extends AppCompatActivity
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -401,31 +375,23 @@ public class gameActivity extends AppCompatActivity
     {
         super.onSaveInstanceState(savedInstanceState);
 
-       // savedInstanceState.put(BUTTON_VALUES, cards);
+        // Loops through the Card array and saves the properties of the objects for a screen
+        // rotation.
         CharSequence[] cardList = new CharSequence[cards.size()];
-
         for (int i = 0; i < cards.size(); i++)
         {
             cardList[i] = cards.get(i).getText();
             enabled= cards.get(i).isEnabled();
         }
-
-
-
-
+        // Puts values into savedInstanceState to retrieve upon rotation.
         savedInstanceState.putInt(C1VAL, c1Val);
         savedInstanceState.putInt(C2VAL, c2Val);
-
         savedInstanceState.putBoolean(ENABLED, enabled);
-
         savedInstanceState.putCharSequenceArray(CHAR_SEQUENCE,cardList);
         savedInstanceState.putIntegerArrayList(INTEGER_ARRAY, cardVals);
-
         savedInstanceState.putInt(TRIES_REMAINING, triesLeft);
         savedInstanceState.putInt(CURRENT_SCORE, mTotalScore);
-
-
-    }
+    } // End onSaveInstanceState
 }
 
 

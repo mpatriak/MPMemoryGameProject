@@ -14,6 +14,7 @@ public class Card extends Button
     private int id;
     private boolean matched = false;
 
+    // Constructor for a Card object.
     public Card(Context context)
     {
         super(context);

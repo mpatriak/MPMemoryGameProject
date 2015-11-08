@@ -17,11 +17,12 @@ public class menuActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
+        // Sets the Play Button to start the game. boardActivity is launched to select the game
+        // size.
         mPlayButton = (Button)findViewById(R.id.play_button);
         mPlayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Start selectorActivity.
                 Intent i = new Intent(getApplicationContext(), boardActivity.class);
                 startActivity(i);
             }

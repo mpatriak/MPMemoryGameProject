@@ -13,15 +13,15 @@ import android.widget.ListView;
 public class boardActivity extends AppCompatActivity
 {
 
-    // String to used a a key in the key-value pair when passing the Extra.
+    // String to be used a a key in the key-value pair when passing the Extra.
     public static final String EXTRA_GAMESIZE = "com.example.michal.memorygameproject.gameSize";
     // Define the androidListView.
     ListView mListView;
-    // Elements that will be displayed in android ListView.
+    // Elements that will be displayed in ListView.
     String[] gameTypes = new String[] {"4 cards", "6 cards", "8 cards", "10 cards", "12 cards",
             "14 cards", "16 cards", "18 cards", "20 cards"};
 
-
+    // Initialization methods.
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -41,19 +41,20 @@ public class boardActivity extends AppCompatActivity
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
+                // Creates a vriable to hold the selected item from the list.
                 String ETGameSize = (String)mListView.getItemAtPosition(position);
 
+                // Launches the gameActivity depending on the size of ETGameSize.
                 switch (ETGameSize)
                 {
                     case "4 cards":
                         Intent a = new Intent(boardActivity.this, gameActivity.class);
                         a.putExtra("GameSize", (int) 2);
-                        a.putExtra("Title", (String) "4-Card Match!");
                         startActivity(a);
                         break;
                     case "6 cards":
                         Intent b = new Intent(boardActivity.this, gameActivity.class);
-                        b.putExtra("GameSize", (int)3);
+                        b.putExtra("GameSize", (int) 3);
                         startActivity(b);
                         break;
                     case "8 cards":
