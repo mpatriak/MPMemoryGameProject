@@ -7,7 +7,7 @@
                 android:paddingRight="@dimen/activity_horizontal_margin"
                 android:paddingTop="@dimen/activity_vertical_margin"
                 android:paddingBottom="@dimen/activity_vertical_margin"
-                tools:context="com.example.michal.mpmemorygameproject.gameActivity">
+                tools:context="com.example.michal.mpmemorygameproject.GameActivity">
 
 
     <TextView
@@ -20,6 +20,28 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="20dp"/>
+
+    <ImageView
+        android:id="@+id/stop_button"
+        android:src="@mipmap/ic_lock_ringer_off"
+        android:contentDescription="Silence audio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        android:layout_alignParentTop="true"
+        android:onClick="onClickStopMusic"
+        android:layout_alignEnd="@+id/triesLeftNumber"/>
+
+    <ImageView
+        android:id="@+id/play_button"
+        android:src="@mipmap/ic_lock_ringer_on"
+        android:contentDescription="Play audio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/triesLeftNumber"
+        android:onClick="onClickPlayMusic"
+        android:visibility="visible"/>
 
     <TextView
         android:layout_width="wrap_content"

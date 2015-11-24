@@ -8,24 +8,36 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
-public class menuActivity extends AppCompatActivity
+public class MenuActivity extends AppCompatActivity
 {
     private Button mPlayButton;
+    private Button mHighscoreButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
-        // Sets the Play Button to start the game. boardActivity is launched to select the game
+        // Sets the Play Button to start the game. BoardActivity is launched to select the game
         // size.
         mPlayButton = (Button)findViewById(R.id.play_button);
         mPlayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), boardActivity.class);
+                Intent i = new Intent(getApplicationContext(), BoardActivity.class);
                 startActivity(i);
             }
+        });
+
+        mHighscoreButton = (Button)findViewById(R.id.highscore_button);
+        mHighscoreButton.setOnClickListener(new View.OnClickListener()
+        {
+           @Override
+        public void onClick(View v)
+           {
+               Intent i = new Intent(getApplicationContext(), HighscoreActivity.class);
+               startActivity(i);
+           }
         });
     }
 
